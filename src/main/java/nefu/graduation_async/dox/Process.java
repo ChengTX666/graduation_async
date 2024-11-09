@@ -7,27 +7,22 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.ReadOnlyProperty;
-import org.springframework.data.relational.core.mapping.Table;
-
 
 import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("user")
-public class User {
+public class Process {
     @Id
     @CreatedBy
     private String id;
     private String name;
-    private String account;
-    private String password;
-    private String role;
-    private String department;
-    private int group;
-    private String teacher;
-    private String student;
+    private String depId;
+    private int weight;
+    private String parts;
+    private String addPart;
     @ReadOnlyProperty
     private LocalDateTime createTime;
     @ReadOnlyProperty

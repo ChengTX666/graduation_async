@@ -1,0 +1,15 @@
+spring:
+  r2dbc:
+    url: r2dbc:mysql://120.46.159.231:3306/2022212808?createDatabaseIfNotExist=true'
+    username: 2022212808
+    password: 2022212808
+
+
+
+
+logging:
+  level:
+    io.r2dbc:
+
+my:
+  key: abc

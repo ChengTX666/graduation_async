@@ -1,7 +1,7 @@
 package nefu.graduation_async.handler;
 
-import nefu.graduation_async.dox.User;
-import nefu.graduation_async.service.UserService;
+import nefu.graduation_async.dox.User02;
+import nefu.graduation_async.service.User02Service;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
@@ -15,10 +15,10 @@ import reactor.netty.http.server.HttpServer;
 
 public class UserHandler {
 
-    private final UserService userService;
+    private final User02Service userService;
 
-    public UserHandler(UserService userService) {
-        this.userService = userService;
+    public UserHandler(User02Service user02Service) {
+        this.userService = user02Service;
     }
 
     // 根据id查询
@@ -29,9 +29,9 @@ public class UserHandler {
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 
         // 调用Service方法得到数据
-        Mono<User> userMono = userService.getById(Integer.parseInt(id));
+        Mono<User02> userMono = userService.getById(Integer.parseInt(id));
         // 把userMono进行转换返回
-        return userMono.flatMap(user ->
+        return userMono.flatMap(user02 ->
                 ServerResponse
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -43,23 +43,23 @@ public class UserHandler {
     // 查询多个
     public Mono<ServerResponse> getAll(ServerRequest request){
         // 调用Service得到结果
-        Flux<User> users = userService.getAll();
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(users, User.class);
+        Flux<User02> users = userService.getAll();
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(users, User02.class);
 
     }
 
     // 保存
     public Mono<ServerResponse> save(ServerRequest request){
         // 获取User对象
-        Mono<User> userMono = request.bodyToMono(User.class);
+        Mono<User02> userMono = request.bodyToMono(User02.class);
         return ServerResponse.ok().build(userService.save(userMono));
     }
 
 
     public static void main(String[] args) {
         // 创建对象
-        UserService userService = new UserService();
-        UserHandler userHandler = new UserHandler(userService);
+        User02Service user02Service = new User02Service();
+        UserHandler userHandler = new UserHandler(user02Service);
         // 创建路由
         RouterFunction<ServerResponse> route = RouterFunctions
                 .route(RequestPredicates.GET("/user/{id}").and(RequestPredicates.accept(MediaType.APPLICATION_JSON)), userHandler::getById)

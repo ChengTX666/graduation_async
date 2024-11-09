@@ -1,42 +1,35 @@
 package nefu.graduation_async.service;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import nefu.graduation_async.Repository.ProcessRepository;
+import nefu.graduation_async.Repository.UserRepository;
+import nefu.graduation_async.dox.Process;
 import nefu.graduation_async.dox.User;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class UserService {
-    // 模拟数据库存储
-    private Map<Integer, User> map = new HashMap<>();
+    private final ProcessRepository processRepository;
+    private final UserRepository userRepository;
 
-    public UserService() {
-        map.put(1, new User("zhangSan"));
-        map.put(2, new User("lisi"));
-        map.put(3, new User("wangWu"));
+
+    public Mono<User> getUser(String account){
+        return userRepository.findByAccount(account);
     }
 
-    // 根据id查询
-    public Mono<User> getById(Integer id){
-        // 返回数据或空值
-        return Mono.justOrEmpty(map.get(id));
+
+    public Mono<List<Process>> listProcess(String depId) {
+        return processRepository.findByDepId(depId).collectList();
     }
 
-    // 查询多个
-    public Flux<User> getAll(){
-        return Flux.fromIterable(map.values());
-    }
-
-    // 保存
-    public Mono<Void> save(Mono<User> userMono){
-        return userMono.doOnNext(user -> {
-            int id = map.size() + 1;
-            map.put(id, user);
-        }).thenEmpty(Mono.empty()); // 最后置空
+    public Flux<Process> listProcess2(String depId) {
+        return processRepository.findByDepId(depId);  // 返回 Flux<Process>
     }
 }
-
