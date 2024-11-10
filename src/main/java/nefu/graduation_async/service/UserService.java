@@ -29,6 +29,11 @@ public class UserService {
         return processRepository.findByDepId(depId).collectList();
     }
 
+    //根据depId和role查看
+    public Mono<List<User>> listUser(String depId,String role){
+        return userRepository.findByDepIdAndRole(depId,role).collectList();
+    }
+
     public Flux<Process> listProcess2(String depId) {
         return processRepository.findByDepId(depId);  // 返回 Flux<Process>
     }

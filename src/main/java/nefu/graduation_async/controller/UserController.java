@@ -19,4 +19,9 @@ public class UserController {
                 map(ResultVO::success);
     }
 
+    @GetMapping("users")
+    public Mono<ResultVO> userList(){
+        return userService.listUser("1","1")
+                .map(ResultVO::success);
+    }
 }
