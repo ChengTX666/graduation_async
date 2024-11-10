@@ -16,8 +16,8 @@ public class ResultVO {
     private int code;
     private Object data;
     //修改为object
-
     private String message;
+
     private static final ResultVO EMPTY=ResultVO.builder().code(200).data(Map.of()).build();
 
     public static ResultVO ok(){
@@ -25,8 +25,12 @@ public class ResultVO {
     }
 
 
-    public static ResultVO success(Map<String,Object> data){
-        return ResultVO.builder().code(200).data(data).build();
+    public static ResultVO success(Code code, Map<String,Object> data){
+        return ResultVO.builder()
+                .code(code.getCode())
+                .message(code.getMessage())
+                .data(data)
+                .build();
     }
     public static ResultVO success(Object data) {
         return ResultVO.builder().code(200).data(data).build();
