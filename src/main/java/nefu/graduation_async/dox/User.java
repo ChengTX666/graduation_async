@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 @Builder
 @Table("user")
 public class User {
+    public static final String ROLE_STUDENT = "qpCf";
+    public static final String ROLE_TEACHER = "kU4T";
+    public static final String ROLE_ADMIN = "R2md";
     @Id
     @CreatedBy
     private String id;

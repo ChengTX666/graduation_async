@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/")
@@ -34,5 +35,15 @@ public class LoginController {
                     resp.getHeaders().add(RequestAttributeConstant.ROLE,user.getRole());
                     return ResultVO.success(user);}
                 ).defaultIfEmpty(ResultVO.error(Code.LOGIN_ERROR));
+    }
+
+    @GetMapping("test")
+    public Mono<ResultVO> test(@RequestAttribute String depId, @RequestAttribute String role, @RequestAttribute String uid)
+    {
+        StringBuilder result=new StringBuilder("depId->>").append(depId).append("  ")
+                .append("role->>").append(role).append("  ")
+                .append("uid->>").append(uid);
+
+        return Mono.just(ResultVO.success(result));
     }
 }

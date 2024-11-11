@@ -1,8 +1,11 @@
 package nefu.graduation_async.filter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nefu.graduation_async.component.JWTComponent;
+import nefu.graduation_async.dox.Department;
 import nefu.graduation_async.dto.Code;
 import nefu.graduation_async.exception.XException;
 import nefu.graduation_async.vo.RequestAttributeConstant;
@@ -29,6 +32,7 @@ public class LoginFilter implements WebFilter {
     private final List<PathPattern> excludes=List.of(new PathPatternParser().parse("/api/login"));
     private final JWTComponent jwtComponent;
     private final ResponseHelper responseHelper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -51,9 +55,16 @@ public class LoginFilter implements WebFilter {
         if(token==null) {
             return responseHelper.response(Code.UNAUTHORIZED,exchange);
         }
+
         return jwtComponent.decode(token).flatMap(decode -> {
             exchange.getAttributes().put(RequestAttributeConstant.UID, decode.getClaim(RequestAttributeConstant.UID).asString());
             exchange.getAttributes().put(RequestAttributeConstant.ROLE, decode.getClaim(RequestAttributeConstant.ROLE).asString());
+            try {
+                Department department = objectMapper.readValue(decode.getClaim("department").asString(), Department.class);
+                exchange.getAttributes().put(RequestAttributeConstant.DEPARTMENT_ID,department.getDepId());
+            } catch (JsonProcessingException e) {
+                return Mono.error(new RuntimeException(e));
+            }
             return chain.filter(exchange);
         });
 

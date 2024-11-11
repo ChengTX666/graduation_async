@@ -14,8 +14,8 @@ public class UserController {
 
 
     @GetMapping("processes")
-    public Mono<ResultVO> processList(){//@RequestAttribute String depId
-        return userService.listProcess("2").
+    public Mono<ResultVO> processList(@RequestAttribute String depId){
+        return userService.listProcess(depId).
                 map(ResultVO::success);
     }
 
@@ -23,5 +23,10 @@ public class UserController {
     public Mono<ResultVO> userList(){
         return userService.listUser("1","1")
                 .map(ResultVO::success);
+    }
+
+    @PatchMapping("reset")
+    public Mono<ResultVO> resetPassword(@RequestAttribute String uid,@RequestBody String newPassword){
+        return userService.resetPassword(uid,newPassword).thenReturn(ResultVO.ok());
     }
 }

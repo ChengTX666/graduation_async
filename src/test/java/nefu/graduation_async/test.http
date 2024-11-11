@@ -1,4 +1,4 @@
-GET http://localhost:8080/flux/all
+GET http://localhost:8080/api/processes
 ###
 GET http://localhost:8080/api/processes
 Content-Type: application/json
@@ -13,3 +13,12 @@ token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIxIiwicm9sZSI6IjEiLCJkZXB
   "account":"1",
   "password":"1"
 }
+
+###测试  Attribute
+GET http://localhost:8080/api/test
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIxIiwicm9sZSI6IjEiLCJkZXBhcnRtZW50Ijoie1wibmFtZVwiOiBcIui9r-S7tuW3peeoi1wiLCBcImRlcElkXCI6IFwiMVwifSIsImV4cCI6MTczMzgxMzQ1NSwiaWF0IjoxNzMxMjIxNDU1LCJncm91cCI6MX0.Fw17GjeCuQ7mYgaUrSYvfGidh3qxjjo04UZFNYnGn6Y
+
+###删除
+DELETE http://localhost:8080/api/admin/department/1
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIxIiwicm9sZSI6IjEiLCJkZXBhcnRtZW50Ijoie1wibmFtZVwiOiBcIui9r-S7tuW3peeoi1wiLCBcImRlcElkXCI6IFwiMVwifSIsImV4cCI6MTczMzgxMzQ1NSwiaWF0IjoxNzMxMjIxNDU1LCJncm91cCI6MX0.Fw17GjeCuQ7mYgaUrSYvfGidh3qxjjo04UZFNYnGn6Y
