@@ -18,4 +18,5 @@ public interface ProcessRepository extends ReactiveCrudRepository<Process,String
 
     @Query("delete from process where id=:pid and depId=:did")
     Mono<Void> deleteByIdAndDepId(String pid, String did);
+
 }

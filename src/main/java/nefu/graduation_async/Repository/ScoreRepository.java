@@ -18,9 +18,12 @@ public interface ScoreRepository extends ReactiveCrudRepository<Score,String> {
     @Query("SELECT * from score where `group`=:group")
     Flux<Score> findByGroup(int group);
 
+    @Query("SELECT * from score where teacher->>'$.teacherId'=:tid")
+    Flux<Score> findScoresByTid(String tid);
+
     @Modifying
     @Query("UPDATE score s set s.detail=:detail where s.id=:sid")
-    Mono<Integer> updateDetailById(String sid, String detail);
+    Mono<Score> updateDetailById(String sid, String detail);
 
     @Query("SELECT * from score where `group`=:group")
     Flux<Score> findScoresByGroup(int group);
