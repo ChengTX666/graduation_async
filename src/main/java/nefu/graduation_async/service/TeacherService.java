@@ -31,6 +31,7 @@ public class TeacherService {
     public Mono<Void> removeProcess(String pid,String did){
        return processRepository.deleteByIdAndDepId(pid,did);
     }
+    //查看过程的在userService里
     //过程
     //得分
 
@@ -54,7 +55,7 @@ public class TeacherService {
         return scoreRepository.findScoresByGroup(group).collectList();
     }
     //查看自己打的分
-    public Mono<List<Score>> scoreList(String tid){
+    public Mono<List<Score>> scoreBy(String tid){
         return scoreRepository.findScoresByTid(tid).collectList();
     }
 

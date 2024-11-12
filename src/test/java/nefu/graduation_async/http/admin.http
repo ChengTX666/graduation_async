@@ -1,0 +1,16 @@
+POST http://localhost:8080/api/login
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIxIiwicm9sZSI6IjEiLCJkZXBhcnRtZW50Ijoie1wibmFtZVwiOiBcIui9r-S7tuW3peeoi1wiLCBcImRlcElkXCI6IFwiMVwifSIsImV4cCI6MTczMzgxMzQ1NSwiaWF0IjoxNzMxMjIxNDU1LCJncm91cCI6MX0.Fw17GjeCuQ7mYgaUrSYvfGidh3qxjjo04UZFNYnGn6Y
+
+{
+  "account":"1",
+  "password":"1"
+}
+
+###有权限
+GET http://localhost:8080/api/admin/users
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIxIiwicm9sZSI6IlIybWQiLCJkZXBhcnRtZW50Ijoie1wibmFtZVwiOiBcIui9r-S7tuW3peeoi1wiLCBcImRlcElkXCI6IFwiMVwifSIsImV4cCI6MTczMzk2NjE0NCwiaWF0IjoxNzMxMzc0MTQ0LCJncm91cCI6MX0.RiOWCF4m7y4EuoDanSMlfag3KkP_GPrjMOEgJRUrf4A
+
+###没权限
+GET http://localhost:8080/api/admin/users
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIxIiwicm9sZSI6IjEiLCJkZXBhcnRtZW50Ijoie1wibmFtZVwiOiBcIui9r-S7tuW3peeoi1wiLCBcImRlcElkXCI6IFwiMVwifSIsImV4cCI6MTczMzgxMzQ1NSwiaWF0IjoxNzMxMjIxNDU1LCJncm91cCI6MX0.Fw17GjeCuQ7mYgaUrSYvfGidh3qxjjo04UZFNYnGn6Y

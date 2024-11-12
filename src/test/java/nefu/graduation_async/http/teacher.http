@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "account":"2",
+  "password":"2"
+}
+###
+http://localhost:8080/api/teacher/students
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.WeyJ1aWQiOiIyIiwicm9sZSI6ImtVNFQiLCJkZXBhcnRtZW50Ijoie1wibmFtZVwiOiBcIuS6uuW3peaZuuiDvVwiLCBcImRlcElkXCI6IFwiM1wifSIsImV4cCI6MTczMzk2NzE0MiwiaWF0IjoxNzMxMzc1MTQyLCJncm91cCI6MX0.gpYQ_xFrPZNiPSVQ8QrvFx79CguFwD3WyrIEEwIj7ZQ
