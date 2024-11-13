@@ -24,6 +24,12 @@ public class AdminService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
+    public Mono<Void> allocation(String depId){
+        userRepository.findByDepIdAndRole(depId,User.ROLE_TEACHER)
+                .
+
+    }
 
     //    添加专业
     @Transactional
@@ -42,7 +48,6 @@ public class AdminService {
                     if(userCount>0)return Mono.error(XException.builder().codeN(Code.ERROR).message("部门包含用户禁止删除").build());
                     return departmentRepository.deleteById(did).then();
                 });
-
     }
 
     //用户

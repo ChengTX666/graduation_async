@@ -15,6 +15,7 @@ public interface UserRepository extends ReactiveCrudRepository<User,String> {
 
     Mono<User> findByAccount(String account);
 
+
     @Modifying
     @Query("UPDATE user u set u.password=:encodePassword where u.id=:uid")
     Mono<Integer> updatePasswordById(String uid,String encodePassword);
@@ -40,5 +41,5 @@ public interface UserRepository extends ReactiveCrudRepository<User,String> {
 
     @Modifying
     @Query("update user u set student=json_set(student,'$.teacherId',:tid) where id=:sid")
-    Mono<Integer> updateStudentById(String sid,String tid);
+    Mono<Void> updateStudentById(String sid,String tid);
 }
