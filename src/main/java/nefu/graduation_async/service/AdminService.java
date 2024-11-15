@@ -24,12 +24,12 @@ public class AdminService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Transactional
-    public Mono<Void> allocation(String depId){
-        userRepository.findByDepIdAndRole(depId,User.ROLE_TEACHER)
-                .
-
-    }
+//    @Transactional
+//    public Mono<Void> allocation(String depId){
+//        userRepository.findByDepIdAndRole(depId,User.ROLE_TEACHER)
+//                .
+//
+//    }
 
     //    添加专业
     @Transactional
