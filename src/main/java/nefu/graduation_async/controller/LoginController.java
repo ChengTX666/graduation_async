@@ -1,7 +1,7 @@
 package nefu.graduation_async.controller;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import nefu.graduation_async.component.JWTComponent;
 import nefu.graduation_async.dto.Code;
@@ -24,7 +24,6 @@ public class LoginController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JWTComponent jwtComponent;
-    private final ObjectMapper objectMapper;
     @PostMapping("login")
     public Mono<ResultVO> login(@RequestBody Login login, ServerHttpResponse resp){
         return userService.getUser(login.getAccount())
