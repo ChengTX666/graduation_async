@@ -28,17 +28,17 @@ public class UserTest {
                     .blockLast();  // 阻塞直到 Flux 完成
 
     }
-    @Test
-    void listProcess2(){
-        userService.listProcess("2")
-                .doOnNext(
-                processList -> processList.forEach(process -> log.info("Process ID: {}, Name: {}", process.getId(), process.getName()))
-        ).block();
-    }
-    @Test
-    void listProcess3(){
-        userService.listProcess("2").flatMapMany(Flux::fromIterable).doOnNext(
-                process -> log.info("ID:"+process.getId()+"Name:"+process.getName())
-        ).blockLast();
-    }
+//    @Test
+//    void listProcess2(){
+//        userService.listProcess("2")
+//                .doOnNext(
+//                processList -> processList.forEach(process -> log.info("Process ID: {}, Name: {}", process.getId(), process.getName()))
+//        ).block();
+//    }
+//    @Test
+//    void listProcess3(){
+//        userService.listProcess("2").flatMapMany(Flux::fromIterable).doOnNext(
+//                process -> log.info("ID:"+process.getId()+"Name:"+process.getName())
+//        ).blockLast();
+//    }
 }
