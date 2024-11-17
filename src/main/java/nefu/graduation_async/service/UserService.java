@@ -1,5 +1,6 @@
 package nefu.graduation_async.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import nefu.graduation_async.dox.User;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.StringCodec;
+import org.redisson.codec.TypedJsonJacksonCodec;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -83,9 +85,19 @@ void init() {
     }
 
     //查看自己部门的过程
+//    public Mono<List<Process>> listProcess(String depId) {
+//        RBucket<List<Process>> bucket = redissonClient
+//                .getBucket("processes:" + depId, new TypedJsonJacksonCodec(new TypeReference<List<Process>>() {}));
+//        return Mono.just(bucket.get())
+//                .onErrorResume(throwable -> Mono.just(Collections.emptyList()));
+//    }
     public Mono<Object> listProcess(String depId) {
 
-        return Mono.just(redissonClient.getBucket("processes:"+depId,StringCodec.INSTANCE).get());
+      RBucket<List<Process>> bucket= redissonClient
+              .getBucket("processes:" + depId,new TypedJsonJacksonCodec(new TypeReference<List<Process>>() {}));
+        List<Process> processes = bucket.get();
+
+        return Mono.just(processes);
 //        return processRepository.findByDepId(depId).collectList();
     }
     public Flux<Process> listProcess2(String depId) {
