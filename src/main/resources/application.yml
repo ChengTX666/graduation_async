@@ -10,7 +10,9 @@ spring:
       username: default
       password: 2046
       database: 9
-
+springdoc:
+  api-docs:
+    path: /SERVICENAME/v3/api-docs
 
 
 logging:
